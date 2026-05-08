@@ -1,0 +1,28 @@
+---
+interface Props {
+  issueNumber?: string;
+}
+
+const { issueNumber = '01' } = Astro.props;
+const wmStyle = 'font-family: Newsreader, serif; font-style: italic; font-weight: 400; letter-spacing: -0.04em; text-transform: none;';
+---
+
+<header class="masthead">
+  <div class="mast-row mono small">
+    <span>VOL. {issueNumber}</span>
+    <span>/</span>
+    <span>MAY 2026</span>
+    <span class="dot"></span>
+    <span>OAKLAND, CA</span>
+    <span class="spacer"></span>
+    <span>$0.00</span>
+  </div>
+
+  <h1 class="word" style={wmStyle}>screengram</h1>
+
+  <div class="mast-row mono small mast-row-bot">
+    <span>gram the screen.</span>
+    <span class="spacer"></span>
+    <span>est. 2026 — late.</span>
+  </div>
+</header>

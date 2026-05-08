@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+import Composite from './Composite.astro';
+import HeroScreenshot from './HeroScreenshot.astro';
+import volPhoto from '../assets/vol-1-photo.jpg';
+
+interface Props {
+  issueNumber?: string;
+}
+
+const { issueNumber = '01' } = Astro.props;
+---
+
+<section class="hero">
+  <Composite layout="pip" corner="bl" vintage big issue={issueNumber}>
+    <Image slot="photo" src={volPhoto} alt="" class="bg-img" />
+    <HeroScreenshot slot="screen" />
+  </Composite>
+  <figcaption class="cap mono small">
+    VOL. {issueNumber} — WILL ROGERS BEACH, 6:31 PM, HEAVEN IS A PLACE ON EARTH.
+  </figcaption>
+</section>

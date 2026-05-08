@@ -1,0 +1,68 @@
+---
+const sections = [
+  { roman: 'I', year: '2015' },
+  { roman: 'II', year: 'now' },
+  { roman: 'III', year: 'the idea' },
+] as const;
+---
+
+<article class="essay">
+  <div class="rule"></div>
+
+  <section class="seg">
+    <div class="seg-mark mono small">
+      <span class="seg-roman">{sections[0].roman}</span>
+      <span class="seg-year"> — {sections[0].year}</span>
+    </div>
+    <div class="seg-body">
+      <p>Frontback died in 2015. The idea it was reaching for didn't.</p>
+      <p>
+        The app was simple. Take a photo with your front camera. Take one with
+        your back camera. Combine them. <em>What you were looking at, and what
+        you looked like while looking at it</em> — one image, two realities.
+        It felt honest in a way neither photo alone could be.
+      </p>
+    </div>
+  </section>
+
+  <section class="seg">
+    <div class="seg-mark mono small">
+      <span class="seg-roman">{sections[1].roman}</span>
+      <span class="seg-year"> — {sections[1].year}</span>
+    </div>
+    <div class="seg-body">
+      <p>
+        The front camera became a studio. Instagram happened. The back camera
+        got better at making the world look perfect. Both directions optimized
+        toward performance.
+      </p>
+      <p>
+        Something else happened too. <em>The screen became the dominant surface.</em>
+        Most of what we look at now isn't the physical world — it's a rectangle.
+        Maps, messages, faces, feeds. The screen is where we actually <em>are</em>.
+        The front camera captures your face; the back camera captures the room.
+        Neither captures what you were doing.
+      </p>
+    </div>
+  </section>
+
+  <section class="seg">
+    <div class="seg-mark mono small">
+      <span class="seg-roman">{sections[2].roman}</span>
+      <span class="seg-year"> — {sections[2].year}</span>
+    </div>
+    <div class="seg-body">
+      <p>
+        Screengram is what Frontback would be if it were made today. A screenshot
+        of whatever was on your screen, paired with a photo of wherever you were.
+        <em> What you were looking at, and where you were while you looked at it.</em>
+      </p>
+      <p class="kicker">
+        The resulting image is strange in the right way. It's more honest than
+        either would be alone.
+      </p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+</article>

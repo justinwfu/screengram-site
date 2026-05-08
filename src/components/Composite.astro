@@ -1,0 +1,55 @@
+---
+// Composite — core layout primitive. Photo as background, screen as inset.
+// The cream/pip/bl combination is the published default; other layouts
+// (sbs/stack/polaroid) and other corners are still wired so the markup
+// matches the design-export 1:1, but they're not used in the shipped site.
+
+type Layout = 'pip' | 'sbs' | 'stack' | 'polaroid';
+type Corner = 'tl' | 'tr' | 'bl' | 'br';
+type Tone = 'warm' | 'cool' | 'dim';
+
+interface Props {
+  layout?: Layout;
+  corner?: Corner;
+  vintage?: boolean;
+  issue?: string;
+  big?: boolean;
+  tone?: Tone;
+}
+
+const {
+  layout = 'pip',
+  corner = 'bl',
+  vintage = true,
+  issue,
+  big = false,
+  tone,
+} = Astro.props;
+
+const vintageAttr = vintage ? '1' : '0';
+
+const classes = (() => {
+  const base = 'composite';
+  const bigCls = big ? ' big' : '';
+  if (layout === 'sbs') return `${base} sbs${bigCls}`;
+  if (layout === 'stack') return `${base} stack${bigCls}`;
+  if (layout === 'polaroid') return `${base} polaroid${bigCls}`;
+  return `${base} pip ${corner}${bigCls}`;
+})();
+---
+
+<div class={classes}>
+  <div class="bg" data-vintage={vintageAttr} data-tone={tone}>
+    <slot name="photo" />
+  </div>
+
+  {layout === 'sbs' && <div class="screen-side"><slot name="screen" /></div>}
+  {layout === 'stack' && <div class="screen-stack"><slot name="screen" /></div>}
+  {layout === 'polaroid' && (
+    <div class="screen-pola">
+      <div class="screen-pola-inner"><slot name="screen" /></div>
+      <div class="pola-caption mono">vol. {issue}</div>
+    </div>
+  )}
+  {(layout === 'pip' || !layout) && <div class="screen-pip"><slot name="screen" /></div>}
+</div>

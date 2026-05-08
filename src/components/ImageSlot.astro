@@ -1,0 +1,13 @@
+---
+// Stand-in for the design tool's <image-slot> drag-and-drop web component.
+// For v1 we render a styled empty surface — uploads aren't part of the
+// marketing site (see design-export/README.md, "Image-slot drop").
+
+interface Props {
+  where: string;
+}
+
+const { where } = Astro.props;
+---
+
+<div class="image-slot" aria-label={`drop a photo · ${where}`}></div>
