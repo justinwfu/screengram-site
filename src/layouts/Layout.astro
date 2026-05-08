@@ -5,12 +5,38 @@ import '../styles/concept.css';
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
+const SITE_NAME = 'Screengram';
+const DEFAULT_TITLE = 'Screengram — gram the screen';
+const DEFAULT_DESCRIPTION = 'A diary kept by your phone, with the world behind it.';
+
 const {
-  title = 'Screengram — gram the screen',
-  description = 'A diary kept by your phone, with the world behind it.',
+  title,
+  description = DEFAULT_DESCRIPTION,
+  noindex = false,
 } = Astro.props;
+
+const fullTitle = title ? `${title} — ${SITE_NAME}` : DEFAULT_TITLE;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageURL = new URL('/og.png', Astro.site).toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: SITE_NAME,
+  description: DEFAULT_DESCRIPTION,
+  applicationCategory: 'PhotographyApplication',
+  operatingSystem: 'iOS',
+  url: Astro.site?.toString() ?? 'https://screengram.app',
+  image: ogImageURL,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+};
 ---
 
 <!doctype html>
@@ -19,14 +45,39 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#f0e7d3" />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+
+    <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&display=swap"
       rel="stylesheet"
     />
-    <title>{title}</title>
+
+    <title>{fullTitle}</title>
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <slot />
