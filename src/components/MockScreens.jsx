@@ -81,7 +81,7 @@ export function MockMaps() {
         display: 'flex', alignItems: 'center', padding: '0 10px',
         boxShadow: '0 1px 6px rgba(0,0,0,0.15)', fontSize: 8,
       }}>
-        <span style={{ color: 'rgba(0,0,0,0.45)' }}>◉ Search Maps</span>
+        <span style={{ color: 'rgba(0,0,0,0.7)' }}>◉ Search Maps</span>
       </div>
       <div style={{
         position: 'absolute', left: 8, right: 8, bottom: 8,
@@ -89,7 +89,7 @@ export function MockMaps() {
         padding: '8px 10px', boxShadow: '0 4px 14px rgba(0,0,0,0.1)',
       }}>
         <div style={{ fontSize: 9, fontWeight: 600 }}>14 min</div>
-        <div style={{ fontSize: 7, color: 'rgba(0,0,0,0.55)' }}>5.2 mi · via I-580 W</div>
+        <div style={{ fontSize: 7, color: 'rgba(0,0,0,0.7)' }}>5.2 mi · via I-580 W</div>
       </div>
     </div>
   );
@@ -120,13 +120,13 @@ export function MockMessages() {
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: 10, fontWeight: 600, color: '#5a4d70',
         }}>M</div>
-        <div style={{ fontSize: 8, marginTop: 2, color: '#666' }}>Mom</div>
+        <div style={{ fontSize: 8, marginTop: 2, color: '#595959' }}>Mom</div>
       </div>
       <div style={{
         flex: 1, padding: '8px 8px 4px', display: 'flex',
         flexDirection: 'column', gap: 1, overflow: 'hidden',
       }}>
-        <div style={{ alignSelf: 'center', fontSize: 6.5, color: '#999', margin: '0 0 4px' }}>
+        <div style={{ alignSelf: 'center', fontSize: 6.5, color: '#595959', margin: '0 0 4px' }}>
           TODAY 4:42 PM
         </div>
         <Bub side="them">are you home for dinner sunday?</Bub>
@@ -141,7 +141,7 @@ export function MockMessages() {
       <div style={{
         margin: '0 8px 8px', padding: '4px 10px',
         border: '0.5px solid rgba(0,0,0,0.15)', borderRadius: 14,
-        fontSize: 8, color: '#aaa', flexShrink: 0,
+        fontSize: 8, color: '#595959', flexShrink: 0,
       }}>iMessage</div>
     </div>
   );
@@ -198,8 +198,8 @@ export function MockNotes() {
         padding: '0 12px 4px', flexShrink: 0,
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
       }}>
-        <span style={{ color: '#c69a3a', fontSize: 9 }}>‹ Notes</span>
-        <span style={{ color: '#c69a3a', fontSize: 11 }}>⊕</span>
+        <span style={{ color: '#7a5800', fontSize: 9 }}>‹ Notes</span>
+        <span style={{ color: '#7a5800', fontSize: 11 }}>⊕</span>
       </div>
       <div style={{
         flex: 1, padding: '4px 14px', overflow: 'hidden',
@@ -208,7 +208,7 @@ export function MockNotes() {
         <div style={{ fontSize: 12, fontWeight: 700, color: '#1a140e', marginBottom: 2 }}>
           Things to remember
         </div>
-        <div style={{ fontSize: 6.5, color: 'rgba(0,0,0,0.4)', marginBottom: 6 }}>May 7 · 4:31 PM</div>
+        <div style={{ fontSize: 6.5, color: 'rgba(0,0,0,0.7)', marginBottom: 6 }}>May 7 · 4:31 PM</div>
         <div style={{ fontSize: 8.5, lineHeight: 1.45, color: '#1a140e' }}>
           <p style={{ margin: '0 0 5px' }}>The screen is the dominant surface now. Most of what we look at isn't the world — it's a rectangle.</p>
           <p style={{ margin: '0 0 5px' }}>The front camera captures your face. The back camera captures the room. Neither captures what you were <em>doing</em>.</p>
@@ -226,11 +226,11 @@ export function MockSafari() {
       <div style={{
         margin: '2px 8px 4px', height: 18, background: '#fff',
         borderRadius: 9, display: 'flex', alignItems: 'center',
-        padding: '0 8px', fontSize: 7, color: 'rgba(0,0,0,0.5)',
+        padding: '0 8px', fontSize: 7, color: 'rgba(0,0,0,0.7)',
         boxShadow: '0 0.5px 0 rgba(0,0,0,0.06)', flexShrink: 0,
       }}>
-        <span style={{ marginRight: 4 }}>𝐀𝐀</span>
-        <span style={{ color: 'rgba(0,0,0,0.45)' }}>nytimes.com</span>
+        <span style={{ marginRight: 4, color: '#595959' }}>𝐀𝐀</span>
+        <span style={{ color: 'rgba(0,0,0,0.7)' }}>nytimes.com</span>
         <span style={{ marginLeft: 'auto' }}>↻</span>
       </div>
       <div style={{
@@ -262,7 +262,7 @@ export function MockCalendar() {
     <div style={screenSurface('#fff')}>
       <StatusRow />
       <div style={{ padding: '4px 14px 6px', flexShrink: 0 }}>
-        <div style={{ fontSize: 8, color: '#e84d3d', fontWeight: 700 }}>MAY 2026</div>
+        <div style={{ fontSize: 8, color: '#b32d1f', fontWeight: 700 }}>MAY 2026</div>
         <div style={{ fontSize: 16, fontWeight: 700, color: '#111', letterSpacing: -0.4 }}>Friday 8</div>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)',
@@ -290,7 +290,7 @@ export function MockCalendar() {
           ['7:00','dinner @ 320','#e84d3d'],
         ].map(([t, l, c], i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span style={{ width: 22, color: '#888', fontVariantNumeric: 'tabular-nums' }}>{t}</span>
+            <span style={{ width: 22, color: '#595959', fontVariantNumeric: 'tabular-nums' }}>{t}</span>
             <span style={{ width: 2, height: 14, background: c, borderRadius: 1 }} />
             <span style={{ color: '#111' }}>{l}</span>
           </div>

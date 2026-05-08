@@ -13,7 +13,18 @@ const { issueNumber = '01' } = Astro.props;
 
 <section class="hero">
   <Composite layout="pip" corner="bl" vintage big issue={issueNumber}>
-    <Image slot="photo" src={volPhoto} alt="" class="bg-img" />
+    <Image
+      slot="photo"
+      src={volPhoto}
+      alt=""
+      class="bg-img"
+      widths={[640, 1024, 1440, 2048]}
+      sizes="(max-width: 1240px) 100vw, 1240px"
+      format="avif"
+      quality={60}
+      loading="eager"
+      fetchpriority="high"
+    />
     <HeroScreenshot slot="screen" />
   </Composite>
   <figcaption class="cap mono small">

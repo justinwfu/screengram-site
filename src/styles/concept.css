@@ -8,8 +8,7 @@
   --rule: #1a140e;
   --accent: #a3431a;
 
-  --serif: 'Newsreader', 'Source Serif 4', Georgia, serif;
-  --mono:  'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  /* --serif and --mono are defined by Astro's <Font> component (astro.config.mjs). */
 
   --maxw: 1240px;
   --gut: 36px;
