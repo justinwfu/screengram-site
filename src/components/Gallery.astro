@@ -1,0 +1,68 @@
+---
+import Composite from './Composite.astro';
+import ImageSlot from './ImageSlot.astro';
+import {
+  MockMaps, MockMessages, MockMusic, MockNotes, MockSafari,
+  MockCalendar, MockPhotos, MockWallet, MockCode,
+} from './MockScreens.jsx';
+
+// Mock screen components are server-rendered to static HTML at build time
+// (no `client:` directive). They are intentionally stylized abstractions —
+// see design-export/README.md and CLAUDE.md.
+const MOCKS = {
+  MockMaps, MockMessages, MockMusic, MockNotes, MockSafari,
+  MockCalendar, MockPhotos, MockWallet, MockCode,
+} as const;
+
+type MockName = keyof typeof MOCKS;
+type Tone = 'warm' | 'cool' | 'dim';
+
+interface Volume {
+  num: string;
+  title: string;
+  mock: MockName;
+  when: string;
+  where: string;
+  tone: Tone;
+}
+
+const VOLUMES: Volume[] = [
+  { num: '02', title: 'morning, no destination', mock: 'MockMaps',
+    when: 'sun · 9:14 am', where: 'kitchen, oakland', tone: 'warm' },
+  { num: '03', title: 'asynchronous', mock: 'MockMessages',
+    when: 'thu · 10:48 pm', where: 'bed, brooklyn', tone: 'cool' },
+  { num: '04', title: 'side a', mock: 'MockMusic',
+    when: 'sat · 2:03 am', where: 'kitchen floor', tone: 'dim' },
+  { num: '05', title: 'three sentences', mock: 'MockNotes',
+    when: 'tue · 6:51 am', where: 'desk, before light', tone: 'warm' },
+  { num: '06', title: 'reading', mock: 'MockSafari',
+    when: 'wed · 7:22 pm', where: 'cafe table', tone: 'warm' },
+  { num: '07', title: 'next week', mock: 'MockCalendar',
+    when: 'fri · 11:09 am', where: 'meeting room 4', tone: 'cool' },
+  { num: '08', title: 'a year, in tiles', mock: 'MockPhotos',
+    when: 'sun · 11:48 pm', where: 'living room', tone: 'dim' },
+  { num: '09', title: 'spending', mock: 'MockWallet',
+    when: 'mon · 12:33 pm', where: 'bus, line 18', tone: 'dim' },
+  { num: '10', title: 'late commit', mock: 'MockCode',
+    when: 'thu · 1:14 am', where: 'kitchen, again', tone: 'dim' },
+];
+---
+
+<div class="gal">
+  {VOLUMES.map((v) => {
+    const Mock = MOCKS[v.mock];
+    return (
+      <figure class="card">
+        <Composite layout="pip" corner="bl" vintage issue={v.num} tone={v.tone}>
+          <ImageSlot slot="photo" where={v.where} />
+          <Mock slot="screen" />
+        </Composite>
+        <figcaption class="cap mono small">
+          <span>VOL. {v.num} —</span>
+          <span class="cap-title"> {v.title}.</span>
+          <span class="cap-meta"> {v.when} · {v.where}</span>
+        </figcaption>
+      </figure>
+    );
+  })}
+</div>

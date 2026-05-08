@@ -1,0 +1,17 @@
+---
+interface Props {
+  issueNumber?: string;
+}
+
+const { issueNumber = '01' } = Astro.props;
+---
+
+<div class="gal-h">
+  <div class="gal-h-roman mono small">— iv —</div>
+  <h2 class="gal-h-title">the archive.</h2>
+  <p class="gal-h-sub">
+    Volumes <em>{issueNumber}</em> through <em>10</em>. Drop a photo onto
+    any tile to fill its second half. Each Screengram is a screenshot, plus
+    the room you were in.
+  </p>
+</div>

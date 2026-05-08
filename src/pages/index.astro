@@ -1,8 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ConceptPage from '../components/ConceptPage.jsx';
+import Topbar from '../components/Topbar.astro';
+import Masthead from '../components/Masthead.astro';
+import Hero from '../components/Hero.astro';
+import Manifesto from '../components/Manifesto.astro';
+import GalleryHeader from '../components/GalleryHeader.astro';
+import Gallery from '../components/Gallery.astro';
+import CTA from '../components/CTA.astro';
+import Colophon from '../components/Colophon.astro';
+
+const issueNumber = '01';
 ---
 
 <Layout>
-  <ConceptPage />
+  <div class="page" data-compact="0">
+    <Topbar />
+    <Masthead issueNumber={issueNumber} />
+    <Hero issueNumber={issueNumber} />
+    <Manifesto />
+    <GalleryHeader issueNumber={issueNumber} />
+    <Gallery />
+    <CTA />
+    <Colophon issueNumber={issueNumber} />
+  </div>
 </Layout>
