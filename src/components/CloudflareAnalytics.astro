@@ -1,0 +1,22 @@
+---
+// Cloudflare Web Analytics beacon. Only injected in production builds AND
+// only when PUBLIC_CF_ANALYTICS_TOKEN is set — keeps dev/preview pageloads
+// out of the metrics, and silently no-ops if the token isn't configured.
+//
+// Set the token in the Cloudflare Pages dashboard:
+//   Settings → Environment variables → Production
+//   Name: PUBLIC_CF_ANALYTICS_TOKEN
+//   Value: <token from Web Analytics property>
+
+const token = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
+const enabled = import.meta.env.PROD && Boolean(token);
+const beaconConfig = enabled ? JSON.stringify({ token }) : null;
+---
+
+{enabled && (
+  <script
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon={beaconConfig}
+  />
+)}
