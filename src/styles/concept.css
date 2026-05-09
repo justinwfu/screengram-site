@@ -61,6 +61,7 @@ em { font-style: italic; }
   letter-spacing: 0.04em;
 }
 .topbar-cta {
+  margin-left: auto;
   background: var(--ink);
   color: var(--bg);
   padding: 7px 12px 6px;
@@ -431,7 +432,14 @@ image-slot {
     align-items: start;
     gap: 20px;
   }
-  .cta-btn { justify-self: start; padding: 16px 20px; }
+  .cta-btn {
+    justify-self: end;
+    gap: 6px;
+    padding: 7px 12px 6px;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+  }
+  .cta-btn .arr { font-size: 11px; }
 }
 
 /* ── Colophon / footer ─────────────────────────────────────────── */
