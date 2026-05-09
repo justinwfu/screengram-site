@@ -417,6 +417,7 @@ image-slot {
   font-size: 14px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  white-space: nowrap;
   transition: background .15s, transform .15s;
 }
 .cta-btn:hover {
@@ -424,6 +425,14 @@ image-slot {
   transform: translate(-2px, -2px);
 }
 .cta-btn .arr { font-size: 18px; }
+@media (max-width: 580px) {
+  .cta-row {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 20px;
+  }
+  .cta-btn { justify-self: start; padding: 16px 20px; }
+}
 
 /* ── Colophon / footer ─────────────────────────────────────────── */
 .colo {
