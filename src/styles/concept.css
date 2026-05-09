@@ -381,6 +381,7 @@ image-slot {
   .gal { grid-template-columns: 1fr; }
   .topbar-mid { display: none; }
   :root { --gut: 18px; }
+  .word { font-size: clamp(56px, 18vw, 108px); }
 }
 
 /* ── CTA ───────────────────────────────────────────────────────── */
