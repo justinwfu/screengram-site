@@ -457,7 +457,7 @@ image-slot {
 .colo-k { color: var(--accent); font-weight: 600; }
 .colo-v { color: var(--ink); margin-top: 2px; text-transform: lowercase; }
 .colo-tag {
-  font-size: 22px;
+  font-size: 16px;
   font-style: italic;
   color: var(--ink);
   line-height: 1.4;
