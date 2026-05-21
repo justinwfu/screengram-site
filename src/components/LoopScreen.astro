@@ -1,0 +1,125 @@
+---
+import {
+  MockMaps,
+  MockMessages,
+  MockMusic,
+  MockNotes,
+  MockSafari,
+  MockCalendar,
+} from './MockScreens.jsx';
+
+interface Props {
+  kind: 'home' | 'cam' | 'review' | 'library';
+}
+
+const { kind } = Astro.props;
+
+const libraryMocks = [MockMaps, MockMessages, MockMusic, MockNotes, MockSafari, MockCalendar];
+---
+{kind === 'home' && (
+  <div class="screen scr-home">
+    <div class="scr-status">9:41</div>
+    <div class="scr-home-mast">
+      <em class="scr-home-em">screengram</em>.
+    </div>
+    <div class="scr-home-strip">
+      <span /><span /><span /><span /><span />
+    </div>
+    <div class="scr-home-prompt">
+      <div class="mono small scr-home-prompt-h">
+        <span class="scr-home-dot"></span> today's prompt · day 47
+      </div>
+      <div class="scr-home-prompt-t">
+        what you were reading at lunch.
+      </div>
+      <div class="scr-home-prompt-actions">
+        <span class="scr-pill-dark">● TAKE IT</span>
+        <span class="scr-pill-skip">skip</span>
+      </div>
+    </div>
+    <div class="scr-home-go">
+      <div class="scr-go-ring"></div>
+      <div class="scr-go-core">GO</div>
+    </div>
+    <div class="scr-home-latest">
+      <div class="scr-latest-thumb"></div>
+      <div class="scr-latest-txt">
+        <div class="mono small">USE LATEST</div>
+        <div class="scr-latest-sub">taken just now</div>
+      </div>
+      <div class="scr-latest-arr">→</div>
+    </div>
+    <div class="scr-tabs">
+      <span data-on="1" /><span /><span /><span /><span />
+    </div>
+  </div>
+)}
+
+{kind === 'cam' && (
+  <div class="screen scr-cam">
+    <div class="scr-cam-vf">
+      <div class="scr-cam-corners">
+        <span /><span /><span /><span />
+      </div>
+      <div class="scr-cam-overlay">
+        <MockSafari />
+      </div>
+      <div class="scr-cam-tip mono small">drag · pinch</div>
+      <div class="scr-cam-pill mono small">
+        <span class="scr-home-dot"></span> frame the room
+      </div>
+    </div>
+    <div class="scr-cam-controls">
+      <span class="scr-cam-side mono small">retake</span>
+      <div class="scr-cam-shutter">
+        <div class="scr-cam-shutter-core"></div>
+      </div>
+      <span class="scr-cam-side mono small">zoom</span>
+    </div>
+  </div>
+)}
+
+{kind === 'review' && (
+  <div class="screen scr-review">
+    <div class="scr-review-h">
+      <div class="mono small">— review —</div>
+      <div class="scr-review-h-t"><em>file it.</em></div>
+    </div>
+    <div class="scr-review-stage">
+      <div class="scr-review-bg"></div>
+      <div class="scr-review-pip">
+        <MockMaps />
+      </div>
+      <div class="scr-review-cap">heaven is a place on earth</div>
+    </div>
+    <div class="scr-review-seg">
+      <span data-on="1">PIP</span><span>SBS</span><span>STACK</span>
+    </div>
+    <div class="scr-review-actions">
+      <span class="scr-pill-ghost">retake</span>
+      <span class="scr-pill-dark scr-pill-grow">file to library</span>
+    </div>
+  </div>
+)}
+
+{kind === 'library' && (
+  <div class="screen scr-lib">
+    <div class="scr-lib-title">library</div>
+    <div class="scr-lib-search mono small">⌕ search captions, places</div>
+    <div class="scr-lib-chips">
+      <span class="scr-chip mono small">by album</span>
+      <span class="scr-chip mono small">by month</span>
+    </div>
+    <div class="scr-lib-grid">
+      {libraryMocks.map((M) => (
+        <div class="scr-lib-cell">
+          <div class="scr-lib-bg"></div>
+          <div class="scr-lib-pip"><M /></div>
+        </div>
+      ))}
+    </div>
+    <div class="scr-tabs">
+      <span /><span data-on="1" /><span /><span /><span />
+    </div>
+  </div>
+)}

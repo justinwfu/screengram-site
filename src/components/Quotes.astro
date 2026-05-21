@@ -1,0 +1,26 @@
+---
+const quotes = [
+  {
+    q: 'I have 4,000 screenshots in my camera roll. I remember three of them. This fixes that.',
+    who: 'beta tester · brooklyn',
+  },
+  {
+    q: "It's like a diary that mostly draws itself.",
+    who: 'beta tester · oakland',
+  },
+  {
+    q: "Finally a use for the back camera that isn't pretending to be a photographer.",
+    who: 'beta tester · austin',
+  },
+];
+---
+<section class="quotes">
+  <div class="qrow">
+    {quotes.map((it) => (
+      <figure class="qcard">
+        <blockquote>"{it.q}"</blockquote>
+        <figcaption class="mono small">— {it.who}</figcaption>
+      </figure>
+    ))}
+  </div>
+</section>
