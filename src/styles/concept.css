@@ -788,7 +788,14 @@ em { font-style: italic; }
   text-align: center;
   color: var(--faded);
   letter-spacing: 0.16em; text-transform: uppercase;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
 }
+.foot-meta a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 0.5px;
+}
+.foot-meta a:hover { color: var(--ink); }
 @media (max-width: 880px) {
   .foot-row { grid-template-columns: 1fr 1fr; }
 }

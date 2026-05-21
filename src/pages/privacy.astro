@@ -1,0 +1,334 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Privacy"
+  description="Screengram's privacy policy. What stays on your device, what isn't sent, and the two narrow exceptions."
+>
+  <div class="mk">
+    <Nav />
+    <main class="privacy">
+      <article class="privacy-doc">
+        <header class="privacy-head">
+          <div class="mono small privacy-eye">— privacy policy —</div>
+          <h1 class="privacy-h">Screengram privacy policy</h1>
+          <p class="privacy-effective mono small">
+            Effective date: 2026-05-19
+          </p>
+        </header>
+
+        <section class="privacy-prose">
+          <p>
+            Screengram is a screenshot camera app. This policy describes what
+            data the app handles, where it lives, and what is sent off your
+            device. Plain language, no surprises.
+          </p>
+          <p>
+            If you have questions, email
+            <a href="mailto:jfu213@gmail.com">jfu213@gmail.com</a>.
+          </p>
+
+          <hr />
+
+          <h2>Short version</h2>
+          <ul>
+            <li>
+              Your photos, screenshots, screengrams, captions, and albums
+              <strong>stay on your device</strong>. Screengram does not
+              upload them to any server.
+            </li>
+            <li>
+              Screengram has <strong>no accounts, no login, no feed, no
+              followers, no advertising, and no third-party tracking
+              SDKs</strong>.
+            </li>
+            <li>
+              Two narrow exceptions: <strong>anonymous crash
+              diagnostics</strong> (sent automatically when the app crashes)
+              and <strong>feedback you explicitly submit</strong> through
+              the in-app feedback form. Both are described below.
+            </li>
+          </ul>
+
+          <hr />
+
+          <h2>What stays on your device</h2>
+          <p>
+            All of the following live locally on your iPhone and are never
+            transmitted by Screengram:
+          </p>
+          <ul>
+            <li>The photos you capture with the in-app camera</li>
+            <li>The screenshots Screengram pairs them with</li>
+            <li>The composite screengrams Screengram produces</li>
+            <li>Captions, overlay text, and album names you create</li>
+            <li>Your library, album organization, and viewing history</li>
+            <li>
+              The local event log used to debug your own session (see
+              "Diagnostic events" below)
+            </li>
+          </ul>
+          <p>
+            Photos that Screengram saves to your camera roll are stored in
+            your Photos library and are governed by Apple's photo permission
+            system. You control them like any other photo.
+          </p>
+
+          <hr />
+
+          <h2>What is collected</h2>
+          <p>
+            <strong>Crash diagnostics (Sentry).</strong> When the app crashes,
+            a diagnostic report is sent to Sentry, a third-party crash
+            reporting service. The report includes the type of crash, the
+            stack trace, the iOS version, the device model, and a random
+            per-install identifier (see "Install ID" below). It does
+            <strong>not</strong> include the contents of your screengrams,
+            screenshots, photos, captions, album names, or any other content
+            you create in the app. Crash reporting is declared in the app's
+            privacy manifest as <code>NSPrivacyCollectedDataTypeCrashData</code>,
+            linked to the install ID, and used solely for fixing bugs.
+          </p>
+          <p>
+            <strong>Install ID.</strong> When Screengram first launches, it
+            generates a random UUID and stores it locally in the app's shared
+            container. This identifier is included in crash reports and in
+            any feedback you explicitly submit, so that multiple reports from
+            the same installation can be correlated for triage. It is a
+            random value, is not derived from any device or user identifier,
+            and cannot be reversed to identify you. It is reset if you
+            uninstall and reinstall the app.
+          </p>
+          <p>
+            <strong>Diagnostic events (local-only by default).</strong>
+            Screengram writes a local event log to your device documenting
+            in-app actions like "screengram saved" or "share sheet completed,"
+            along with non-identifying metadata. This log lives on your
+            device. It is <strong>only</strong> sent off-device if you choose
+            to attach it to a feedback submission (see below).
+          </p>
+
+          <hr />
+
+          <h2>What you can choose to send</h2>
+          <p>
+            <strong>Feedback.</strong> If you open Settings → Send Feedback
+            and submit a report, the app sends a JSON payload to Screengram's
+            feedback service (a small Cloudflare Worker) which files a ticket
+            in our issue tracker. The payload includes:
+          </p>
+          <ul>
+            <li>The description you typed</li>
+            <li>Your install ID</li>
+            <li>Your device model and iOS version</li>
+            <li>
+              The recent diagnostic event log (so we can see what you did
+              before the issue)
+            </li>
+          </ul>
+          <p>
+            We use feedback submissions to fix bugs and improve the app.
+            Nothing is sent unless you tap the submit button.
+          </p>
+
+          <hr />
+
+          <h2>What Screengram does <em>not</em> do</h2>
+          <ul>
+            <li>
+              No advertising SDKs, no advertising identifiers (IDFA), no
+              advertising frameworks.
+            </li>
+            <li>
+              No third-party analytics SDKs (e.g., Firebase Analytics,
+              Mixpanel, Amplitude).
+            </li>
+            <li>No location collection.</li>
+            <li>No contact list or address book access.</li>
+            <li>No tracking across other apps or websites.</li>
+            <li>No selling or sharing of personal information.</li>
+            <li>
+              No accounts, sign-in, or backend service that persists your
+              content.
+            </li>
+          </ul>
+
+          <hr />
+
+          <h2>Permissions Screengram asks for</h2>
+          <p>
+            Screengram requests these iOS permissions. You may decline any of
+            them; the affected features will simply not work.
+          </p>
+          <ul>
+            <li>
+              <strong>Photo Library</strong> — to read screenshots from your
+              camera roll (so we can pair them with a fresh photo) and to
+              save finished screengrams back to your library. Required for
+              the core capture flow.
+            </li>
+            <li>
+              <strong>Camera</strong> — to take the paired photo. Required
+              for the core capture flow.
+            </li>
+          </ul>
+          <p>
+            Screengram does not request notifications, location, microphone,
+            contacts, calendars, or any other permission in v1.
+          </p>
+
+          <hr />
+
+          <h2>Third-party services Screengram uses</h2>
+          <ul>
+            <li>
+              <strong>Sentry</strong> — receives crash diagnostics described
+              above.
+              <a href="https://sentry.io/privacy/" target="_blank" rel="noopener">
+                Sentry's privacy policy</a>.
+            </li>
+            <li>
+              <strong>Cloudflare Workers</strong> — receives feedback
+              submissions when you submit them, and forwards them to our
+              internal issue tracker.
+              <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">
+                Cloudflare's privacy policy</a>.
+            </li>
+          </ul>
+          <p>
+            Both services are configured to receive only the narrow data
+            described above.
+          </p>
+
+          <hr />
+
+          <h2>Children</h2>
+          <p>
+            Screengram is not directed to children under 13. We do not
+            knowingly collect data from children under 13.
+          </p>
+
+          <hr />
+
+          <h2>Changes</h2>
+          <p>
+            If this policy changes, the effective date at the top will be
+            updated and the new version will be posted at this URL. Material
+            changes will also be noted in the app's release notes.
+          </p>
+
+          <hr />
+
+          <h2>Contact</h2>
+          <p>
+            Questions, concerns, deletion requests, or anything else:
+          </p>
+          <p>
+            <a href="mailto:jfu213@gmail.com">jfu213@gmail.com</a>
+          </p>
+          <p>
+            Deletion: because Screengram does not maintain a user account or
+            store your content on a server, "deleting your data" simply means
+            uninstalling the app, which removes all locally stored
+            screengrams, screenshots, photos, albums, captions, the install
+            ID, and the local event log. If you have submitted feedback that
+            included your install ID, email the address above and we will
+            remove the matching submissions from our issue tracker.
+          </p>
+        </section>
+      </article>
+    </main>
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  .privacy {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 48px var(--gut) 80px;
+  }
+  .privacy-doc {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .privacy-head {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .privacy-eye {
+    color: var(--accent);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .privacy-h {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 56px);
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    color: var(--ink);
+  }
+  .privacy-effective {
+    color: var(--faded);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .privacy-prose {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .privacy-prose p {
+    margin: 0 0 18px;
+    color: var(--ink);
+  }
+  .privacy-prose h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 26px;
+    letter-spacing: -0.015em;
+    margin: 40px 0 14px;
+    color: var(--ink);
+  }
+  .privacy-prose ul {
+    margin: 0 0 18px;
+    padding-left: 22px;
+  }
+  .privacy-prose li {
+    margin: 0 0 8px;
+  }
+  .privacy-prose a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 0.5px;
+  }
+  .privacy-prose a:hover {
+    text-decoration-thickness: 1px;
+  }
+  .privacy-prose code {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: var(--card);
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 0.5px solid color-mix(in oklab, var(--ink) 12%, transparent);
+  }
+  .privacy-prose hr {
+    border: 0;
+    border-top: 0.5px solid color-mix(in oklab, var(--ink) 18%, transparent);
+    margin: 32px 0;
+  }
+  .privacy-prose strong {
+    font-weight: 600;
+  }
+</style>
