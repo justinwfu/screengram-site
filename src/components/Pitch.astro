@@ -1,0 +1,34 @@
+---
+const items = [
+  {
+    n: '01',
+    h: 'screenshot anything.',
+    b: 'A recipe. A map. The receipt for the thing you keep meaning to return. iOS does what it always does.',
+  },
+  {
+    n: '02',
+    h: 'open screengram.',
+    b: 'It already has the screenshot waiting. Tap GO — the back camera opens with the screenshot floating in the viewfinder.',
+  },
+  {
+    n: '03',
+    h: 'frame the room. file it.',
+    b: 'Drag the screenshot anywhere. Hit the shutter. Pick a layout. Now you have proof you were actually somewhere.',
+  },
+];
+---
+<section class="pitch" id="how">
+  <div class="section-h pitch-h">
+    <div class="mono small">— how it works —</div>
+    <h2>three taps, one weirdly honest photo.</h2>
+  </div>
+  <div class="pitch-grid">
+    {items.map((it) => (
+      <div class="pitch-card">
+        <div class="pitch-n mono">{it.n}</div>
+        <h3>{it.h}</h3>
+        <p>{it.b}</p>
+      </div>
+    ))}
+  </div>
+</section>

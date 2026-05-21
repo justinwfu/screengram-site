@@ -1,0 +1,35 @@
+---
+const features = [
+  { ico: '☼', h: 'daily prompt',
+    b: 'A Wordle-shaped nudge. One screengram a day, on a shared question.' },
+  { ico: '⊞', h: 'three layouts',
+    b: 'PiP, side-by-side, stacked. Same content, different rhythm.' },
+  { ico: '▶', h: 'reveal reels',
+    b: 'Export a tiny video where the room dissolves to reveal the screenshot. 1080×1920, h.264.' },
+  { ico: '▤', h: 'albums',
+    b: 'Group screengrams without moving them. A screengram can live in many. Or none.' },
+  { ico: '◉', h: 'home screen widget',
+    b: 'Your latest screengram on your lock screen and home. Three sizes.' },
+  { ico: '⤴', h: 'share extension',
+    b: 'From the Photos share sheet, send a screenshot straight to Screengram. The room camera opens immediately.' },
+  { ico: '⌕', h: 'search & filter',
+    b: 'Search captions and places. Filter by month or album. Find that screengram from Tuesday.' },
+  { ico: '⊘', h: 'private by default',
+    b: 'No feed. No followers. No cloud. Your library lives on your phone until you say otherwise.' },
+];
+---
+<section class="features" id="features">
+  <div class="section-h feat-h">
+    <div class="mono small">— what's inside —</div>
+    <h2><span>small app.</span><br /><span>big rectangle energy.</span></h2>
+  </div>
+  <div class="feat-grid">
+    {features.map((it) => (
+      <div class="feat-card">
+        <div class="feat-ico">{it.ico}</div>
+        <h3>{it.h}</h3>
+        <p>{it.b}</p>
+      </div>
+    ))}
+  </div>
+</section>

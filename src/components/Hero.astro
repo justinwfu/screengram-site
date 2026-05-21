@@ -1,33 +1,71 @@
 ---
-import { Image } from 'astro:assets';
-import Composite from './Composite.astro';
-import HeroScreenshot from './HeroScreenshot.astro';
-import volPhoto from '../assets/vol-1-photo.jpg';
-
-interface Props {
-  issueNumber?: string;
-}
-
-const { issueNumber = '01' } = Astro.props;
+import PhoneMock from './PhoneMock.astro';
+import { MockMaps } from './MockScreens.jsx';
+import volOnePhoto from '../assets/images/vol-1-photo.jpg';
 ---
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="hero-eyebrow">
+        <span class="hero-dot"></span>
+        <span class="mono">new for iOS · TestFlight open</span>
+      </div>
+      <h1 class="hero-h">
+        your screenshots,<br />
+        <em>plus</em> a photo where<br />
+        you were.
+      </h1>
+      <p class="hero-sub">
+        Screengram pairs every screenshot with a photo of the room.
+        One image, two realities — filed into a tiny private library
+        that only you can see.
+      </p>
+      <div class="hero-cta-row">
+        <a class="btn btn-primary" href="#cta">
+          <span>join the TestFlight</span>
+          <span class="arr">→</span>
+        </a>
+        <a class="btn btn-ghost" href="/demo/">
+          <span>open the live demo</span>
+          <span class="arr">↗</span>
+        </a>
+      </div>
+      <div class="hero-meta mono">
+        <span>iOS 17+</span>
+        <span class="dotsep"></span>
+        <span>free, no account</span>
+        <span class="dotsep"></span>
+        <span>private by default</span>
+      </div>
+    </div>
 
-<section class="hero">
-  <Composite layout="pip" corner="bl" vintage big issue={issueNumber}>
-    <Image
-      slot="photo"
-      src={volPhoto}
-      alt=""
-      class="bg-img"
-      widths={[640, 1024, 1440, 2048]}
-      sizes="(max-width: 1240px) 100vw, 1240px"
-      format="avif"
-      quality={60}
-      loading="eager"
-      fetchpriority="high"
-    />
-    <HeroScreenshot slot="screen" />
-  </Composite>
-  <figcaption class="cap mono small">
-    VOL. {issueNumber} — WILL ROGERS BEACH, 6:31 PM, HEAVEN IS A PLACE ON EARTH.
-  </figcaption>
+    <div class="hero-stage">
+      <PhoneMock
+        big
+        photo={volOnePhoto}
+        photoAlt="Will Rogers beach at sunset"
+        layout="pip"
+        corner="bl"
+        caption="will rogers beach — sun 6:31 pm"
+        overlayText="Found the spot."
+        widths={[480, 640, 960, 1280]}
+      >
+        <MockMaps />
+      </PhoneMock>
+      <div class="hero-confetti" aria-hidden="true">
+        <span class="conf c1"></span>
+        <span class="conf c2"></span>
+        <span class="conf c3"></span>
+        <span class="conf c4"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-strip">
+    <span class="strip-chip"><em>📱</em> a screenshot</span>
+    <span class="strip-plus">＋</span>
+    <span class="strip-chip"><em>📷</em> a photo</span>
+    <span class="strip-eq">=</span>
+    <span class="strip-chip strip-chip-accent">one image you'll actually remember</span>
+  </div>
 </section>
