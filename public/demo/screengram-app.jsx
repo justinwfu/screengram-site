@@ -165,7 +165,7 @@ function SideRail({ screen, setScreen }) {
   return (
     <nav className="side-rail">
       <div className="rail-mark">
-        <a href="Screengram.html" className="rail-back">← essay</a>
+        <a href="/" className="rail-back">← back</a>
       </div>
       <div className="rail-list">
         {links.map(([k, l]) => (
