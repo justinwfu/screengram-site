@@ -1166,3 +1166,11 @@ em { font-style: italic; }
   transform-origin: top left;
   transform: scale(calc(100cqi / 220px));
 }
+
+/* Section-header overrides: keep specific h2s on a fixed line shape. */
+.pitch-h h2 {
+  white-space: nowrap;
+  font-size: clamp(18px, 4.6vw, 56px);
+  text-wrap: nowrap;
+}
+.feat-h h2 { text-wrap: nowrap; }
