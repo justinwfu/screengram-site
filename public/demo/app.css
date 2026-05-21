@@ -1138,7 +1138,13 @@ em { font-style: italic; }
   text-transform: uppercase;
 }
 
-.vf-overlay { padding: 0 16px 8px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.vf-overlay {
+  position: absolute; inset: 0;
+  padding: 14px 16px;
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+  pointer-events: none;
+}
+.vf-overlay > * { pointer-events: auto; }
 .vf-chip {
   appearance: none; border: 0;
   background: rgba(0,0,0,0.45);
