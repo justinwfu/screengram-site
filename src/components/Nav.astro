@@ -1,9 +1,11 @@
 ---
+import { Image } from 'astro:assets';
+import appIcon from '../assets/images/app-icon.png';
 ---
 <header class="nav">
   <div class="nav-inner">
     <a class="nav-mark" href="#top">
-      <span class="nav-mark-s">:S</span>
+      <Image src={appIcon} alt="" width={30} height={30} class="nav-app-icon" />
       <span class="nav-mark-name">screengram</span>
     </a>
     <nav class="nav-links">

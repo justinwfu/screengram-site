@@ -83,12 +83,13 @@ em { font-style: italic; }
   gap: 28px;
 }
 .nav-mark {
-  display: flex; align-items: baseline; gap: 8px;
+  display: flex; align-items: center; gap: 10px;
 }
-.nav-mark-s {
-  font-family: var(--serif); font-style: italic; font-weight: 600;
-  font-size: 22px; color: var(--accent);
-  letter-spacing: -0.04em;
+.nav-app-icon {
+  width: 30px; height: 30px;
+  border-radius: 7px;
+  display: block;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12), 0 0 0 0.5px rgba(0,0,0,0.08);
 }
 .nav-mark-name {
   font-family: var(--serif); font-style: italic; font-weight: 500;
@@ -334,6 +335,10 @@ em { font-style: italic; }
   border-radius: 34px;
   overflow: hidden;
   background: #000;
+  /* Anchor 6cqi etc. on the overlay text to the phone's width, not
+     the viewport. (The PiP container at .pm-screen-pip stays nested
+     inside this one; container queries don't interfere.) */
+  container-type: inline-size;
 }
 .pm-photo {
   position: absolute; inset: 0;
@@ -411,19 +416,19 @@ em { font-style: italic; }
 }
 .pm-overlay-text {
   position: absolute;
-  left: 50%;
-  top: 38%;
-  transform: translate(-50%, -50%);
+  left: 8%;
+  right: 8%;
+  top: 18%;
   z-index: 3;
   color: #fff;
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
-  font-size: clamp(22px, 3.2vw, 38px);
+  font-size: clamp(24px, 6cqi, 42px);
   letter-spacing: -0.02em;
   text-align: center;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.45);
-  max-width: 78%;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6), 0 1px 3px rgba(0,0,0,0.5);
+  white-space: nowrap;
   line-height: 1.05;
   pointer-events: none;
 }
