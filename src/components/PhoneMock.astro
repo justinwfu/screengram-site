@@ -1,0 +1,41 @@
+---
+interface Props {
+  big?: boolean;
+  photoSrc: string;
+  layout?: 'pip' | 'sbs' | 'stack';
+  corner?: 'tl' | 'tr' | 'bl' | 'br';
+  caption?: string;
+}
+const {
+  big = false,
+  photoSrc,
+  layout = 'pip',
+  corner = 'bl',
+  caption,
+} = Astro.props;
+---
+<div class:list={['pm', big && 'pm-big']}>
+  <div class="pm-bezel">
+    <div class="pm-island"></div>
+    <div class:list={['pm-inner', `pm-${layout}`]}>
+      <div class="pm-photo" style={`background-image: url('${photoSrc}')`}></div>
+      {layout === 'pip' && (
+        <div class:list={['pm-screen-pip', `pm-corner-${corner}`]}>
+          <slot name="inset" />
+        </div>
+      )}
+      {layout === 'sbs' && (
+        <div class="pm-screen-side">
+          <slot name="inset" />
+        </div>
+      )}
+      {layout === 'stack' && (
+        <div class="pm-screen-stack">
+          <slot name="inset" />
+        </div>
+      )}
+      {caption && <div class="pm-caption mono">{caption}</div>}
+    </div>
+  </div>
+  <div class="pm-shadow"></div>
+</div>

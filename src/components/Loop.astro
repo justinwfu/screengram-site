@@ -1,0 +1,55 @@
+---
+import PhoneFrame from './PhoneFrame.astro';
+import LoopScreen from './LoopScreen.astro';
+
+const steps = [
+  {
+    label: 'home',
+    kind: 'home' as const,
+    headline: 'use the latest, or just go.',
+    body: 'Take a screenshot anywhere on iOS, then open Screengram. The Home screen detects it and offers a one-tap "use latest" hero. Or tap GO and pick from your photos.',
+  },
+  {
+    label: 'camera',
+    kind: 'cam' as const,
+    headline: 'the screenshot is in the viewfinder.',
+    body: 'Translucent overlay shows you exactly where the screenshot will land. Drag it, pinch to resize, anchor it to a corner. Frame the room. Tap the shutter.',
+  },
+  {
+    label: 'review',
+    kind: 'review' as const,
+    headline: 'pip, side, or stack.',
+    body: "Three composite layouts. Add a single italic caption that floats on the photo. Don't like it? Retake. Like it? File it to your library.",
+  },
+  {
+    label: 'library',
+    kind: 'library' as const,
+    headline: 'a tiny private archive.',
+    body: 'Search by caption or place. Filter by month or album. Tap any tile to open the detail view — share, export a reveal reel, or add it to an album.',
+  },
+];
+---
+<section class="loop">
+  <div class="section-h">
+    <div class="mono small">— the loop —</div>
+    <h2>screenshot → room → library.</h2>
+    <p class="section-sub">It takes about eight seconds. We timed it.</p>
+  </div>
+  <div class="loop-stack">
+    {steps.map((s, i) => (
+      <div class:list={['loop-row', i % 2 === 1 && 'reverse']}>
+        <div class="loop-phone">
+          <PhoneFrame>
+            <LoopScreen kind={s.kind} />
+          </PhoneFrame>
+          <div class="loop-tag mono">{s.label}</div>
+        </div>
+        <div class="loop-copy">
+          <div class="loop-step mono small">step 0{i + 1}</div>
+          <h3>{s.headline}</h3>
+          <p>{s.body}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
