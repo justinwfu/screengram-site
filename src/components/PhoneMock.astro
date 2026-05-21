@@ -9,6 +9,7 @@ interface Props {
   layout?: 'pip' | 'sbs' | 'stack';
   corner?: 'tl' | 'tr' | 'bl' | 'br';
   caption?: string;
+  overlayText?: string;
   /** widths fed to Astro <Image>. Defaults to a hero-sized set. */
   widths?: number[];
 }
@@ -20,6 +21,7 @@ const {
   layout = 'pip',
   corner = 'bl',
   caption,
+  overlayText,
   widths = [320, 480, 640, 960],
 } = Astro.props;
 ---
@@ -38,6 +40,9 @@ const {
       )}
       {layout === 'pip' && (
         <div class={`pm-screen-pip pm-corner-${corner}`}><slot /></div>
+      )}
+      {overlayText && (
+        <div class="pm-overlay-text">{overlayText}</div>
       )}
       {caption && (
         <div class="pm-caption mono">{caption}</div>

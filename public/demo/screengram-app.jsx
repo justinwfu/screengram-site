@@ -45,7 +45,7 @@ const SEED_ALBUMS = [
 ];
 
 const DAILY_PROMPTS = [
-  'what you were reading at lunch.',
+  'the alarm + you ignoring it',
   'the last thing you screenshotted to remember.',
   'whatever pulled you out of the moment.',
   'a map of where you wanted to be.',

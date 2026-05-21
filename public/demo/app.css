@@ -99,7 +99,18 @@ em { font-style: italic; }
 @media (max-width: 760px) {
   .app-stage { grid-template-columns: 1fr; }
   .side-rail { display: none; }
-  .stage-frame { padding: 16px; }
+  .stage-frame { padding: 12px; }
+  .stage-frame > * {
+    transform: scale(0.78);
+    transform-origin: top center;
+    margin-bottom: -22%;
+  }
+}
+@media (max-width: 380px) {
+  .stage-frame > * {
+    transform: scale(0.68);
+    margin-bottom: -32%;
+  }
 }
 
 /* ── App scoped surface ────────────────────────────────────────── */
@@ -1507,7 +1518,8 @@ em { font-style: italic; }
   transition: left 0.2s;
 }
 .set-toggle[data-on="1"] { background: var(--accent); }
-.set-toggle[data-on="1"] i { left: 21px; }
+.set-toggle[data-on="1"] i { left: 21px; transform: none; }
+.set-toggle i { transform: none; }
 
 /* ── How to use ─────────────────────────────────────────────────── */
 .howto { padding: 60px 22px 28px; gap: 16px; }

@@ -1,6 +1,6 @@
 ---
 import PhoneMock from './PhoneMock.astro';
-import { MockSafari } from './MockScreens.jsx';
+import { MockMaps } from './MockScreens.jsx';
 import volOnePhoto from '../assets/images/vol-1-photo.jpg';
 ---
 <section class="hero" id="top">
@@ -12,8 +12,8 @@ import volOnePhoto from '../assets/images/vol-1-photo.jpg';
       </div>
       <h1 class="hero-h">
         your screenshots,<br />
-        <em>plus</em> where you were<br />
-        when you took them.
+        <em>plus</em> a photo of where<br />
+        you were.
       </h1>
       <p class="hero-sub">
         Screengram pairs every screenshot with a photo of the room.
@@ -47,9 +47,10 @@ import volOnePhoto from '../assets/images/vol-1-photo.jpg';
         layout="pip"
         corner="bl"
         caption="will rogers beach — sun 6:31 pm"
+        overlayText="Found the spot."
         widths={[480, 640, 960, 1280]}
       >
-        <MockSafari />
+        <MockMaps />
       </PhoneMock>
       <div class="hero-confetti" aria-hidden="true">
         <span class="conf c1"></span>
@@ -61,7 +62,6 @@ import volOnePhoto from '../assets/images/vol-1-photo.jpg';
   </div>
 
   <div class="hero-strip">
-    <span class="mono">a screengram is —</span>
     <span class="strip-chip"><em>📱</em> a screenshot</span>
     <span class="strip-plus">＋</span>
     <span class="strip-chip"><em>📷</em> a photo</span>
