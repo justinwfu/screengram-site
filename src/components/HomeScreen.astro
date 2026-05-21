@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+import pCafe from '../assets/images/p-cafe.png';
+import pBedroomNight from '../assets/images/p-bedroom-night.png';
+import pKitchenWarm from '../assets/images/p-kitchen-warm.png';
+import pCityDawn from '../assets/images/p-city-dawn.png';
+import pNightPhone from '../assets/images/p-night-phone.png';
+
+const stripPhotos = [
+  { src: pCafe, alt: 'cafe' },
+  { src: pBedroomNight, alt: 'bedroom at night' },
+  { src: pKitchenWarm, alt: 'warm kitchen' },
+  { src: pCityDawn, alt: 'city at dawn' },
+  { src: pNightPhone, alt: 'phone at night' },
+];
+const thumbWidths = [64, 128];
+---
+<div class="screen scr-home">
+  <div class="scr-status">9:41</div>
+  <div class="scr-home-mast">
+    <em class="scr-home-em">screengram</em>.
+  </div>
+  <div class="scr-home-strip">
+    {stripPhotos.map((p) => (
+      <div>
+        <Image src={p.src} alt={p.alt} widths={thumbWidths} formats={['avif', 'webp']} quality={55} class="scr-photo-fill" />
+      </div>
+    ))}
+  </div>
+  <div class="scr-home-prompt">
+    <div class="mono small scr-home-prompt-h">
+      <span class="scr-home-dot"></span> today's prompt · day 47
+    </div>
+    <div class="scr-home-prompt-t">
+      what you were reading at lunch.
+    </div>
+    <div class="scr-home-prompt-actions">
+      <span class="scr-pill-dark">● TAKE IT</span>
+      <span class="scr-pill-skip">skip</span>
+    </div>
+  </div>
+  <div class="scr-home-go">
+    <div class="scr-go-ring"></div>
+    <div class="scr-go-core">GO</div>
+  </div>
+  <div class="scr-home-latest">
+    <div class="scr-latest-thumb">
+      <Image src={pCafe} alt="" widths={thumbWidths} formats={['avif', 'webp']} quality={55} class="scr-photo-fill" />
+    </div>
+    <div class="scr-latest-txt">
+      <div class="mono small">USE LATEST</div>
+      <div class="scr-latest-sub">taken just now</div>
+    </div>
+    <div class="scr-latest-arr">→</div>
+  </div>
+  <div class="scr-tabs">
+    <span data-on="1"></span><span></span><span></span><span></span><span></span>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  big?: boolean;
+  photo: ImageMetadata;
+  photoAlt?: string;
+  layout?: 'pip' | 'sbs' | 'stack';
+  corner?: 'tl' | 'tr' | 'bl' | 'br';
+  caption?: string;
+  /** widths fed to Astro <Image>. Defaults to a hero-sized set. */
+  widths?: number[];
+}
+
+const {
+  big = false,
+  photo,
+  photoAlt = '',
+  layout = 'pip',
+  corner = 'bl',
+  caption,
+  widths = [320, 480, 640, 960],
+} = Astro.props;
+---
+<div class={`pm ${big ? 'pm-big' : ''}`}>
+  <div class="pm-bezel">
+    <div class="pm-island"></div>
+    <div class={`pm-inner pm-${layout}`}>
+      <div class="pm-photo">
+        <Image src={photo} alt={photoAlt} widths={widths} formats={['avif', 'webp']} quality={60} />
+      </div>
+      {layout === 'sbs' && (
+        <div class="pm-screen-side"><slot /></div>
+      )}
+      {layout === 'stack' && (
+        <div class="pm-screen-stack"><slot /></div>
+      )}
+      {layout === 'pip' && (
+        <div class={`pm-screen-pip pm-corner-${corner}`}><slot /></div>
+      )}
+      {caption && (
+        <div class="pm-caption mono">{caption}</div>
+      )}
+    </div>
+  </div>
+</div>

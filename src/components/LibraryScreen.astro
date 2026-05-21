@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import { MockMaps, MockMessages, MockMusic, MockNotes, MockSafari, MockCalendar } from './MockScreens.jsx';
+import pCafe from '../assets/images/p-cafe.png';
+import pBedroomNight from '../assets/images/p-bedroom-night.png';
+import pKitchenWarm from '../assets/images/p-kitchen-warm.png';
+import pCityDawn from '../assets/images/p-city-dawn.png';
+import pNightPhone from '../assets/images/p-night-phone.png';
+import pStreetNight from '../assets/images/p-street-night.png';
+
+const tiles = [
+  { src: pCafe, alt: 'cafe', Mock: MockMaps },
+  { src: pBedroomNight, alt: 'bedroom at night', Mock: MockMessages },
+  { src: pKitchenWarm, alt: 'warm kitchen', Mock: MockMusic },
+  { src: pCityDawn, alt: 'city at dawn', Mock: MockNotes },
+  { src: pNightPhone, alt: 'phone at night', Mock: MockSafari },
+  { src: pStreetNight, alt: 'street at night', Mock: MockCalendar },
+];
+const tileWidths = [160, 320];
+---
+<div class="screen scr-lib">
+  <div class="scr-lib-title">library</div>
+  <div class="scr-lib-search mono small">⌕ search captions, places</div>
+  <div class="scr-lib-chips">
+    <span class="scr-chip mono small">by album</span>
+    <span class="scr-chip mono small">by month</span>
+  </div>
+  <div class="scr-lib-grid">
+    {tiles.map(({ src, alt, Mock }) => (
+      <div class="scr-lib-cell">
+        <div class="scr-lib-bg">
+          <Image src={src} alt={alt} widths={tileWidths} formats={['avif', 'webp']} quality={55} class="scr-photo-fill" />
+        </div>
+        <div class="scr-lib-pip"><Mock /></div>
+      </div>
+    ))}
+  </div>
+  <div class="scr-tabs">
+    <span></span><span data-on="1"></span><span></span><span></span><span></span>
+  </div>
+</div>

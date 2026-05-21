@@ -1,26 +1,42 @@
 ---
+import { getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-import Topbar from '../components/Topbar.astro';
-import Masthead from '../components/Masthead.astro';
+import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
-import Manifesto from '../components/Manifesto.astro';
-import GalleryHeader from '../components/GalleryHeader.astro';
-import Gallery from '../components/Gallery.astro';
-import CTA from '../components/CTA.astro';
-import Colophon from '../components/Colophon.astro';
+import Pitch from '../components/Pitch.astro';
+import Loop from '../components/Loop.astro';
+import Features from '../components/Features.astro';
+import Layouts from '../components/Layouts.tsx';
+import Quotes from '../components/Quotes.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import Footer from '../components/Footer.astro';
+import pKitchenWarm from '../assets/images/p-kitchen-warm.png';
 
-const issueNumber = '01';
+// Pre-optimize the Layouts-showcase photo so the React island gets a
+// CDN-friendly URL instead of the raw asset.
+const layoutsPhoto = await getImage({
+  src: pKitchenWarm,
+  width: 720,
+  format: 'avif',
+  quality: 60,
+});
 ---
-
 <Layout>
-  <main class="page" data-compact="0">
-    <Topbar />
-    <Masthead issueNumber={issueNumber} />
-    <Hero issueNumber={issueNumber} />
-    <Manifesto />
-    <GalleryHeader issueNumber={issueNumber} />
-    <Gallery />
-    <CTA />
-    <Colophon issueNumber={issueNumber} />
-  </main>
+  <div class="mk">
+    <Nav />
+    <main>
+      <Hero />
+      <Pitch />
+      <Loop />
+      <Features />
+      <Layouts
+        client:visible
+        photoSrc={layoutsPhoto.src}
+        photoAlt="desk, before light"
+      />
+      <Quotes />
+      <FinalCTA />
+      <Footer />
+    </main>
+  </div>
 </Layout>
