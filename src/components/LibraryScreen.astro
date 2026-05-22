@@ -1,6 +1,9 @@
 ---
 import { Image } from 'astro:assets';
-import { MockMaps, MockMessages, MockMusic, MockNotes, MockSafari, MockCalendar } from './MockScreens.jsx';
+import MiniTabs from './MiniTabs.astro';
+import {
+  MockPhotos, MockCalendar, MockSafari, MockNotes, MockMusic, MockMessages,
+} from './MockScreens.jsx';
 import pCafe from '../assets/images/p-cafe.png';
 import pBedroomNight from '../assets/images/p-bedroom-night.png';
 import pKitchenWarm from '../assets/images/p-kitchen-warm.png';
@@ -9,33 +12,39 @@ import pNightPhone from '../assets/images/p-night-phone.png';
 import pStreetNight from '../assets/images/p-street-night.png';
 
 const tiles = [
-  { src: pCafe, alt: 'cafe', Mock: MockMaps },
-  { src: pBedroomNight, alt: 'bedroom at night', Mock: MockMessages },
-  { src: pKitchenWarm, alt: 'warm kitchen', Mock: MockMusic },
-  { src: pCityDawn, alt: 'city at dawn', Mock: MockNotes },
-  { src: pNightPhone, alt: 'phone at night', Mock: MockSafari },
-  { src: pStreetNight, alt: 'street at night', Mock: MockCalendar },
+  { src: pCafe,         alt: 'cafe',         Mock: MockPhotos },
+  { src: pBedroomNight, alt: 'bedroom',      Mock: MockCalendar },
+  { src: pKitchenWarm,  alt: 'kitchen',      Mock: MockSafari },
+  { src: pCityDawn,     alt: 'city dawn',    Mock: MockNotes },
+  { src: pNightPhone,   alt: 'phone night',  Mock: MockMusic },
+  { src: pStreetNight,  alt: 'street night', Mock: MockMessages },
 ];
 const tileWidths = [160, 320];
 ---
-<div class="screen scr-lib">
-  <div class="scr-lib-title">library</div>
-  <div class="scr-lib-search mono small">⌕ search captions, places</div>
-  <div class="scr-lib-chips">
-    <span class="scr-chip mono small">by album</span>
-    <span class="scr-chip mono small">by month</span>
+<div class="lp-screen lp-lib">
+  <div class="lp-lib-head">
+    <div class="lp-lib-title">library</div>
+    <div class="mono lp-lib-count">7 screengrams</div>
   </div>
-  <div class="scr-lib-grid">
+
+  <div class="lp-lib-search mono">
+    <span class="lp-lib-search-i">⌕</span>
+    <span class="lp-lib-search-p">search captions, places</span>
+  </div>
+
+  <div class="lp-lib-chips">
+    <span class="lp-chip mono">by album</span>
+    <span class="lp-chip mono">by month</span>
+  </div>
+
+  <div class="lp-lib-grid">
     {tiles.map(({ src, alt, Mock }) => (
-      <div class="scr-lib-cell">
-        <div class="scr-lib-bg">
-          <Image src={src} alt={alt} widths={tileWidths} formats={['avif', 'webp']} quality={55} class="scr-photo-fill" />
-        </div>
-        <div class="scr-lib-pip"><Mock /></div>
+      <div class="lp-lcell">
+        <Image src={src} alt={alt} widths={tileWidths} formats={['avif', 'webp']} quality={55} class="lp-lcell-bg" />
+        <div class="lp-lcell-pip"><Mock /></div>
       </div>
     ))}
   </div>
-  <div class="scr-tabs">
-    <span></span><span data-on="1"></span><span></span><span></span><span></span>
-  </div>
+
+  <MiniTabs on="library" />
 </div>

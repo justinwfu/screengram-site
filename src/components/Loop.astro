@@ -2,10 +2,9 @@
 import PhoneFrame from './PhoneFrame.astro';
 import HomeScreen from './HomeScreen.astro';
 import CamScreen from './CamScreen.astro';
-import ReviewScreen from './ReviewScreen.astro';
 import LibraryScreen from './LibraryScreen.astro';
 
-type Kind = 'home' | 'cam' | 'review' | 'library';
+type Kind = 'home' | 'cam' | 'library';
 
 interface Step {
   label: string;
@@ -18,25 +17,19 @@ const steps: Step[] = [
   {
     label: 'home',
     kind: 'home',
-    headline: 'use the latest, or just go.',
-    body: 'Take a screenshot anywhere on iOS, then open Screengram. The Home screen detects it and offers a one-tap "use latest" hero. Or tap GO and pick from your photos.',
+    headline: 'take a screenshot.',
+    body: 'Anywhere on iOS — a recipe, a map, a tweet, a passage. Open Screengram. The Home screen already knows you took one.',
   },
   {
     label: 'camera',
     kind: 'cam',
-    headline: 'the screenshot is in the viewfinder.',
-    body: 'Translucent overlay shows you exactly where the screenshot will land. Drag it, pinch to resize, anchor it to a corner. Frame the room. Tap the shutter.',
-  },
-  {
-    label: 'review',
-    kind: 'review',
-    headline: 'pip, side, or stack.',
-    body: "Three composite layouts. Add a single italic caption that floats on the photo. Don't like it? Retake. Like it? File it to your library.",
+    headline: 'take a photo with the screenshot in it.',
+    body: 'The back camera opens with a translucent overlay of the screenshot floating in the viewfinder. Drag it, pinch to resize, anchor to a corner. Frame the room. Tap the shutter.',
   },
   {
     label: 'library',
     kind: 'library',
-    headline: 'a tiny private archive.',
+    headline: 'it lands in your archive.',
     body: 'Search by caption or place. Filter by month or album. Tap any tile to open the detail view — share, export a reveal reel, or add it to an album.',
   },
 ];
@@ -44,7 +37,7 @@ const steps: Step[] = [
 <section class="loop">
   <div class="section-h">
     <div class="mono small">— the loop —</div>
-    <h2>screenshot → room → library.</h2>
+    <h2>screenshot → pic → library.</h2>
     <p class="section-sub">It takes about eight seconds. We timed it.</p>
   </div>
   <div class="loop-stack">
@@ -54,7 +47,6 @@ const steps: Step[] = [
           <PhoneFrame>
             {s.kind === 'home' && <HomeScreen />}
             {s.kind === 'cam' && <CamScreen />}
-            {s.kind === 'review' && <ReviewScreen />}
             {s.kind === 'library' && <LibraryScreen />}
           </PhoneFrame>
           <div class="loop-tag mono">{s.label}</div>

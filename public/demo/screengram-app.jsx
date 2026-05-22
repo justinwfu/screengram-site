@@ -145,6 +145,8 @@ function App() {
             onClick={() => setScreen('cap-screenshot')} />
           <TweakButton label="Open reel export"
             onClick={() => { setActive(library[0]); setScreen('reel-export'); }} />
+          <TweakButton label="Replay 'saved' print"
+            onClick={() => setScreen('cap-saved')} />
         </TweakSection>
       </TweaksPanel>
     </div>
@@ -203,47 +205,60 @@ function ScreenRouter(props) {
   }
 }
 
-// ─── Onboarding — three-page dictionary entry ──────────────────────
-// Verbatim from OnboardingView.swift in the repo.
+// ─── Onboarding — single page (alpha-fixes-w1 redesign) ────────────
+// One page with a compact example composite + a Go button that bundles
+// camera + photos-read permission requests. Replaces the previous
+// three-page dictionary loop (collapsed in alpha-fixes-w1).
 function Onboarding({ setScreen }) {
-  const [page, setPage] = useState(0);
-  const PAGES = [
-    { eyebrow:'screengram', kind:'noun',
-      body:'a paired record of what you were looking at and where you were looking from.' },
-    { eyebrow:'screengram', kind:'verb',
-      body:'to capture experiences with meaningful context.' },
-    { eyebrow:'screengram', kind:'noun',
-      body:'screenshot camera app. usage tips in How to use Screengram under Settings.' },
-  ];
-  const cur = PAGES[page];
-  const isLast = page === PAGES.length - 1;
-  const next = () => isLast ? setScreen('home') : setPage(page + 1);
-
   return (
-    <div className="onb onb-v2">
-      <div className="onb-dict">
-        <div className="onb-dict-head">
-          <h1 className="onb-dict-word">{cur.eyebrow}</h1>
-          <div className="onb-dict-kind">{cur.kind}</div>
+    <div className="onb onb-v3">
+      <div className="onb-mark">
+        <div className="onb-mark-eye mono small">— screengram —</div>
+      </div>
+
+      <div className="onb-example">
+        <div className="onb-example-frame">
+          <div className="onb-example-photo" />
+          <div className="onb-example-pip">
+            <window.MockSafari />
+          </div>
+          <div className="onb-example-cap">heaven is a place on earth</div>
         </div>
-        <p className="onb-dict-body">{cur.body}</p>
+      </div>
+
+      <div className="onb-copy">
+        <h1 className="onb-h">
+          a <em>screen</em>shot,<br/>a photo<em>graph</em>.
+        </h1>
+        <p className="onb-sub">
+          Pair every screenshot with a photo of where you were.
+          One image, two realities — filed into a tiny private library.
+        </p>
+      </div>
+
+      <div className="onb-perms">
+        <div className="onb-perm">
+          <span className="onb-perm-ico">◉</span>
+          <div className="onb-perm-txt">
+            <div className="onb-perm-k">Camera</div>
+            <div className="mono small onb-perm-v">to photograph the room</div>
+          </div>
+        </div>
+        <div className="onb-perm">
+          <span className="onb-perm-ico">▤</span>
+          <div className="onb-perm-txt">
+            <div className="onb-perm-k">Photos · read</div>
+            <div className="mono small onb-perm-v">to pull the latest screenshot</div>
+          </div>
+        </div>
       </div>
 
       <div className="onb-foot">
-        <div className="onb-dots-v2">
-          {PAGES.map((_, i) => (
-            <span key={i} data-on={i === page ? '1' : '0'} />
-          ))}
-        </div>
-        <button className="onb-cta-v2" onClick={next}>
-          <span>{isLast ? 'Go' : 'Next'}</span>
+        <button className="onb-cta-v2" onClick={() => setScreen('home')}>
+          <span>Go</span>
           <span className="arr">→</span>
         </button>
-        {!isLast ? (
-          <button className="onb-skip mono small" onClick={() => setScreen('home')}>skip</button>
-        ) : (
-          <div style={{ height: 22 }} />
-        )}
+        <div className="mono small onb-fine">free · no account · iOS 17+</div>
       </div>
     </div>
   );
@@ -556,7 +571,6 @@ function CapReview({ setScreen, pending, setPending, library, setLibrary, t }) {
 
         <div className="cap3-meta mono small">
           <div><span className="k">when</span><span className="v">today · 4:48 pm</span></div>
-          <div><span className="k">where</span><span className="v">desk, oakland</span></div>
           <div><span className="k">source</span><span className="v">safari · nytimes.com</span></div>
         </div>
 
@@ -569,24 +583,103 @@ function CapReview({ setScreen, pending, setPending, library, setLibrary, t }) {
   );
 }
 
-// ─── Capture: 4) saved stamp ──────────────────────────────────────
-function CapSaved({ setScreen, library }) {
+// ─── Capture: 4) saved — polaroid prints from Dynamic Island ─────
+// The Dynamic Island morphs into a printer slot; a polaroid extrudes,
+// develops from dark to photo, then drops + rotates and slots into
+// its place in the library grid behind it.
+function CapSaved({ setScreen, library, pending }) {
+  // phases drive the CSS state machine on `.csv[data-phase]`.
+  //   0 idle    — library faded, island normal
+  //   1 wake    — island stretches down into a printer slot
+  //   2 print   — polaroid extrudes (with tiny wiggle)
+  //   3 develop — polaroid emerged, photo fades up from dark
+  //   4 drop    — polaroid tilts and dives toward target cell
+  //   5 settled — polaroid scaled into the cell; toast in
+  const [phase, setPhase] = useState(0);
+
   useEffect(() => {
-    const id = setTimeout(() => setScreen('library'), 1800);
-    return () => clearTimeout(id);
+    const seq = [
+      [120, 1],
+      [380, 2],
+      [1700, 3],
+      [2900, 4],
+      [3700, 5],
+      [4800, 'nav'],
+    ];
+    const ids = seq.map(([t, p]) =>
+      setTimeout(() => (p === 'nav' ? setScreen('library') : setPhase(p)), t)
+    );
+    return () => ids.forEach(clearTimeout);
   }, []);
+
   const sg = library[0];
+  const Mock = window[sg.mock] || window.MockSafari;
+
+  // Library backdrop: target cell first (highlighted dashed), then the
+  // next five recents. Keep it short — feels like the top of the grid.
+  const backdrop = library.slice(1, 6);
+
   return (
-    <div className="cap cap-4">
-      <div className="saved-stamp">
-        <div className="stamp">
-          <div className="stamp-inner">
-            <div className="mono small">— filed —</div>
-            <div className="stamp-num stamp-num-v2">in library</div>
-            <div className="mono small">{sg.when}</div>
-          </div>
+    <div className="csv" data-phase={phase}>
+      {/* faded library grid behind — the new polaroid will dive into
+          the first cell (the dashed target). */}
+      <div className="csv-libwrap">
+        <div className="csv-libhead">
+          <div className="csv-libtitle">library</div>
+          <div className="mono small csv-libcount">{library.length} screengrams</div>
         </div>
-        <p className="saved-msg">added to your library.</p>
+        <div className="csv-grid">
+          <div className="csv-cell csv-target">
+            <div className="csv-target-tick">+</div>
+          </div>
+          {backdrop.map((s) => {
+            const M = window[s.mock] || window.MockSafari;
+            return (
+              <div key={s.id} className="csv-cell">
+                <div className="csv-pol-mini">
+                  <div className="csv-pol-mini-photo">
+                    <div className="csv-pol-mini-bg" />
+                    <div className="csv-pol-mini-pip"><M /></div>
+                  </div>
+                  <div className="csv-pol-mini-cap">{s.caption}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Island morph: black slot extruding from the bottom of the
+          system Dynamic Island, with a sliver of paper at the lip. */}
+      <div className="csv-slot">
+        <div className="csv-slot-lip" />
+      </div>
+
+      {/* The polaroid being printed. Sits below the island in z-order
+          so its top edge is naturally clipped while emerging. */}
+      <div className="csv-pol">
+        <div className="csv-pol-photo">
+          <div className="csv-pol-photo-bg" />
+          <div className="csv-pol-photo-pip">
+            <Mock />
+          </div>
+          <div className="csv-pol-grain" />
+          <div className="csv-pol-develop" />
+        </div>
+        <div className="csv-pol-cap">{sg.caption || 'just now'}</div>
+      </div>
+
+      {/* "Filed" toast appears once polaroid has landed. */}
+      <div className="csv-toast">
+        <span className="csv-toast-tick">
+          <svg viewBox="0 0 14 14" width="11" height="11" fill="none"
+               stroke="currentColor" strokeWidth="2"
+               strokeLinecap="round" strokeLinejoin="round">
+            <path d="M2 7.5l3.2 3.2L12 4" />
+          </svg>
+        </span>
+        <span className="csv-toast-text">filed to library</span>
+        <span className="mono small csv-toast-when">{sg.when}</span>
       </div>
     </div>
   );

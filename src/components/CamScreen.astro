@@ -3,26 +3,36 @@ import { Image } from 'astro:assets';
 import { MockSafari } from './MockScreens.jsx';
 import pCityDawn from '../assets/images/p-city-dawn.png';
 ---
-<div class="screen scr-cam">
-  <div class="scr-cam-vf">
-    <Image src={pCityDawn} alt="" widths={[240, 480]} formats={['avif', 'webp']} quality={60} class="scr-photo-fill" />
-    <div class="scr-cam-vf-dim" aria-hidden="true"></div>
-    <div class="scr-cam-corners">
+<div class="lp-screen lp-cam">
+  <div class="lp-vf">
+    <Image src={pCityDawn} alt="" widths={[240, 480]} formats={['avif', 'webp']} quality={60} class="lp-vf-photo-img" />
+    <div class="lp-vf-photo-wash" aria-hidden="true"></div>
+
+    <div class="lp-vf-corners">
       <span></span><span></span><span></span><span></span>
     </div>
-    <div class="scr-cam-overlay">
-      <MockSafari />
+
+    <div class="lp-vf-shot">
+      <div class="lp-vf-shot-frame"><MockSafari /></div>
+      <div class="lp-vf-shot-tip mono">drag · pinch</div>
     </div>
-    <div class="scr-cam-tip mono small">drag · pinch</div>
-    <div class="scr-cam-pill mono small">
-      <span class="scr-home-dot"></span> frame the room
+
+    <div class="lp-vf-chip mono">
+      <span class="lp-vf-chip-d" data-on="1"></span>
+      <span>overlay on</span>
+    </div>
+    <div class="lp-vf-pill mono">
+      <span class="lp-dot"></span>
+      <span>frame the room</span>
     </div>
   </div>
-  <div class="scr-cam-controls">
-    <span class="scr-cam-side mono small">retake</span>
-    <div class="scr-cam-shutter">
-      <div class="scr-cam-shutter-core"></div>
+
+  <div class="lp-cam-ctrls">
+    <div class="lp-cam-side mono">retake<br />screen</div>
+    <div class="lp-cam-shutter">
+      <span class="lp-cam-shutter-ring"></span>
+      <span class="lp-cam-shutter-core"></span>
     </div>
-    <span class="scr-cam-side mono small">zoom</span>
+    <div class="lp-cam-side mono">zoom<br />+/−</div>
   </div>
 </div>
